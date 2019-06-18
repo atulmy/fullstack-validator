@@ -41,18 +41,29 @@ export function isLengthMax({ value, length }: Input): boolean {
   return value.length <= length;
 }
 
-// Validation
-export default function validate(validations: object[] = []) {
-  const checks = {
-    email: isEmail,
-    empty: isEmpty,
-    notEmpty: isNotEmpty,
-    equal: isEqual,
-    length: isLength,
-    lengthMin: isLengthMin,
-    lengthMax: isLengthMax
-  };
+interface Validations {
+  check: string;
+  data: any;
+  not?: boolean;
+  message?: string;
+}
 
+interface Checks {
+  [key: string]: any;
+}
+
+export const checks: Checks = {
+  email: isEmail,
+  empty: isEmpty,
+  notEmpty: isNotEmpty,
+  equal: isEqual,
+  length: isLength,
+  lengthMin: isLengthMin,
+  lengthMax: isLengthMax
+};
+
+// Validation
+export default function validate(validations: Validations[] = []) {
   for (let v of validations) {
     if (v.not ? checks[v.check](v.data) : !checks[v.check](v.data)) {
       throw new Error(v.message);

@@ -42,21 +42,21 @@ function isLengthMax(_a) {
     return value.length <= length;
 }
 exports.isLengthMax = isLengthMax;
+exports.checks = {
+    email: isEmail,
+    empty: isEmpty,
+    notEmpty: isNotEmpty,
+    equal: isEqual,
+    length: isLength,
+    lengthMin: isLengthMin,
+    lengthMax: isLengthMax
+};
 // Validation
 function validate(validations) {
     if (validations === void 0) { validations = []; }
-    var checks = {
-        email: isEmail,
-        empty: isEmpty,
-        notEmpty: isNotEmpty,
-        equal: isEqual,
-        length: isLength,
-        lengthMin: isLengthMin,
-        lengthMax: isLengthMax,
-    };
     for (var _i = 0, validations_1 = validations; _i < validations_1.length; _i++) {
         var v = validations_1[_i];
-        if (v.not ? checks[v.check](v.data) : !checks[v.check](v.data)) {
+        if (v.not ? exports.checks[v.check](v.data) : !exports.checks[v.check](v.data)) {
             throw new Error(v.message);
         }
     }
