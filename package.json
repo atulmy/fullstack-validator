@@ -1,0 +1,64 @@
+{
+  "name": "fullstack-validator",
+  "version": "0.0.1",
+  "description": "Full-Stack Validator",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Atul Yadav <atul.12788@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/atulmy/fullstack-validator",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atulmy/fullstack-validator"
+  },
+  "bugs": {
+    "url": "https://github.com/atulmy/fullstack-validator/issues"
+  },
+  "keywords": [
+    "validation",
+    "fullstack",
+    "javascript"
+  ],
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "lint": "tslint --format stylish --project .",
+    "test": "jest --config"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "husky": "^2.4.1",
+    "jest": "24.8.0",
+    "lint-staged": "^8.2.1",
+    "prettier": "^1.18.2",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.17.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.5.2"
+  },
+  "lint-staged": {
+    "*.{ts}": [
+      "npm run lint -- --fix",
+      "git add"
+    ],
+    "*.{ts,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "jest": {
+    "preset": "ts-jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run lint && npm run build && npm run test",
+      "pre-version": "npm run lint && npm run build && npm test"
+    }
+  },
+  "dependencies": {}
+}
