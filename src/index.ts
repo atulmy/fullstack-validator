@@ -10,10 +10,7 @@ import {
 } from "./rules";
 
 interface Inputs {
-  check: string;
-  data: any;
-  not?: boolean;
-  message?: string;
+  [key: string]: any;
 }
 
 interface Rules {
@@ -54,7 +51,7 @@ class Validator {
   public validate(inputs: Inputs[] = []) {
     console.log(inputs);
 
-    for (let v of inputs) {
+    for (const v of inputs) {
       if (v.not ? this.rules[v.check](v.data) : !this.rules[v.check](v.data)) {
         throw new Error(v.message);
       }
