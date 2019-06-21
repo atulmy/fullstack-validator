@@ -1,7 +1,14 @@
 import Validator from "./";
 
-describe("Test", () => {
-  test("does something", () => {
+interface Input {
+  value?: any;
+  value1?: any;
+  value2?: any;
+  length?: number;
+}
+
+describe("validate", () => {
+  test("email", () => {
     const inputs = [
       {
         data: { value: "atul.12788@gmail" },
@@ -17,5 +24,29 @@ describe("Test", () => {
     }
 
     expect(checkValidation).toThrowError("Please enter valid email.");
+  });
+
+  test("custom rule", () => {
+    const inputs = [
+      {
+        data: { value1: 2, value2: 4 },
+        check: "double",
+        message: "Double value is incorrect."
+      }
+    ];
+
+    const rules = {
+      double: ({ value1, value2 }: Input): boolean => {
+        return value1 * value1 === value2;
+      }
+    };
+
+    const v = new Validator(rules);
+
+    function checkValidation() {
+      v.validate(inputs);
+    }
+
+    expect(checkValidation).toThrowError("Double value is incorrect.");
   });
 });

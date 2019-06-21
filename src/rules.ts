@@ -5,36 +5,62 @@ interface Input {
   length?: number;
 }
 
-// Email
-export function isEmail({ value }: Input): boolean {
-  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(value).toLowerCase());
-}
-
+/**
+ * Check for empty
+ * @param {*} inputs
+ * @returns {boolean}
+ */
 export function isEmpty({ value }: Input): boolean {
   return !value;
 }
 
+/**
+ * Check for not empty
+ * @param {*} inputs
+ * @returns {boolean}
+ */
 export function isNotEmpty({ value }: Input): boolean {
-  return !!value;
+  return !isEmpty({ value });
 }
 
-// Equal
+/**
+ * Check equality
+ * @param {*} inputs
+ * @returns {boolean}
+ */
 export function isEqual({ value1, value2 }: Input): boolean {
   return value1 === value2;
 }
 
-// Length
+/**
+ * Check given string for equal length
+ * @param {*} inputs
+ * @returns {boolean}
+ */
 export function isLength({ value, length }: Input): boolean {
   return value.length === length;
 }
 
-// Length minimum
+/**
+ * Check given string for minimum length
+ * @param {*} inputs
+ * @returns {boolean}
+ */
 export function isLengthMin({ value, length }: Input): boolean {
   return value.length >= length;
 }
 
-// Length maximum
+/**
+ * Check given string for maximum length
+ * @param {*} inputs
+ * @returns {boolean}
+ */
 export function isLengthMax({ value, length }: Input): boolean {
   return value.length <= length;
+}
+
+// Email
+export function isEmail({ value }: Input): boolean {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(value).toLowerCase());
 }

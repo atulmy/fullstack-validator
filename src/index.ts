@@ -20,21 +20,24 @@ interface Rules {
   [key: string]: any;
 }
 
+/**
+ * Default rules
+ */
 export const rules: Rules = {
-  email: isEmail,
   empty: isEmpty,
   notEmpty: isNotEmpty,
   equal: isEqual,
   length: isLength,
   lengthMin: isLengthMin,
-  lengthMax: isLengthMax
+  lengthMax: isLengthMax,
+  email: isEmail
 };
 
 /**
  * @class Validator
  */
 class Validator {
-  private rules: Rules;
+  private readonly rules: Rules;
 
   /**
    * @constructor
@@ -49,9 +52,9 @@ class Validator {
    * @param {*} inputs
    */
   public validate(inputs: Inputs[] = []) {
-    console.log(this.rules);
+    console.log(inputs);
 
-    for (const v of inputs) {
+    for (let v of inputs) {
       if (v.not ? this.rules[v.check](v.data) : !this.rules[v.check](v.data)) {
         throw new Error(v.message);
       }
