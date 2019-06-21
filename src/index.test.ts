@@ -10,6 +10,10 @@ describe("Test", () => {
       }
     ];
 
-    expect(validate(rules)).toThrow(Error);
+    function checkValidation() {
+      validate(rules);
+    }
+
+    expect(checkValidation).toThrowError("Please enter valid email.");
   });
 });

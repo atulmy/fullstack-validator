@@ -1,58 +1,17 @@
 // Validation methods
 
-interface Input {
-  value?: any;
-  value1?: any;
-  value2?: any;
-  length?: number;
-}
-
-// Email
-export function isEmail({ value }: Input): boolean {
-  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(value).toLowerCase());
-}
-
-export function isEmpty({ value }: Input): boolean {
-  return !value;
-}
-
-export function isNotEmpty({ value }: Input): boolean {
-  return !!value;
-}
-
-// Equal
-export function isEqual({ value1, value2 }: Input): boolean {
-  return value1 === value2;
-}
-
-// Length
-export function isLength({ value, length }: Input): boolean {
-  return value.length === length;
-}
-
-// Length minimum
-export function isLengthMin({ value, length }: Input): boolean {
-  return value.length >= length;
-}
-
-// Length maximum
-export function isLengthMax({ value, length }: Input): boolean {
-  return value.length <= length;
-}
-
-interface Validations {
+interface Inputs {
   check: string;
   data: any;
   not?: boolean;
   message?: string;
 }
 
-interface Checks {
+interface Rules {
   [key: string]: any;
 }
 
-export const checks: Checks = {
+export const rules: Rules = {
   email: isEmail,
   empty: isEmpty,
   notEmpty: isNotEmpty,
@@ -62,11 +21,29 @@ export const checks: Checks = {
   lengthMax: isLengthMax
 };
 
-// Validation
-export default function validate(validations: Validations[] = []) {
-  for (let v of validations) {
-    if (v.not ? checks[v.check](v.data) : !checks[v.check](v.data)) {
-      throw new Error(v.message);
+/**
+ * @class Validator
+ */
+class Validator {
+  private rules: Rules;
+
+  /**
+   * @constructor
+   * @param {*} rules
+   */
+  constructor(rulesCustom: Rules) {
+    this.rules = { rules, ...rulesCustom };
+  }
+
+  /**
+   * validate
+   * @param {*} inputs
+   */
+  validate(inputs: Inputs[] = []) {
+    for (let v of inputs) {
+      if (v.not ? this.rules[v.check](v.data) : !this.rules[v.check](v.data)) {
+        throw new Error(v.message);
+      }
     }
   }
 }

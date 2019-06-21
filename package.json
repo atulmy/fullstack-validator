@@ -51,7 +51,8 @@
     ]
   },
   "jest": {
-    "preset": "ts-jest"
+    "preset": "ts-jest",
+    "rootDir": "src"
   },
   "husky": {
     "hooks": {
