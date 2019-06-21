@@ -41,7 +41,7 @@ class Validator {
    * @param {*} rulesCustom
    */
   constructor(rulesCustom: Rules = []) {
-    this.rules = { rules, ...rulesCustom };
+    this.rules = { ...rules, ...rulesCustom };
   }
 
   /**
@@ -49,6 +49,8 @@ class Validator {
    * @param {*} inputs
    */
   public validate(inputs: Inputs[] = []) {
+    console.log(this.rules);
+
     for (const v of inputs) {
       if (v.not ? this.rules[v.check](v.data) : !this.rules[v.check](v.data)) {
         throw new Error(v.message);
