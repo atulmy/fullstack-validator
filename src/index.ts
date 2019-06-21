@@ -1,4 +1,13 @@
-// Validation methods
+// Imports
+import {
+  isEmail,
+  isEmpty,
+  isEqual,
+  isLength,
+  isLengthMax,
+  isLengthMin,
+  isNotEmpty
+} from "./rules";
 
 interface Inputs {
   check: string;
@@ -29,9 +38,9 @@ class Validator {
 
   /**
    * @constructor
-   * @param {*} rules
+   * @param {*} rulesCustom
    */
-  constructor(rulesCustom: Rules) {
+  constructor(rulesCustom: Rules = []) {
     this.rules = { rules, ...rulesCustom };
   }
 
@@ -39,11 +48,13 @@ class Validator {
    * validate
    * @param {*} inputs
    */
-  validate(inputs: Inputs[] = []) {
-    for (let v of inputs) {
+  public validate(inputs: Inputs[] = []) {
+    for (const v of inputs) {
       if (v.not ? this.rules[v.check](v.data) : !this.rules[v.check](v.data)) {
         throw new Error(v.message);
       }
     }
   }
 }
+
+export default Validator;

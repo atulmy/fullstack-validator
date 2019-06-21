@@ -1,8 +1,8 @@
-import validate from "./";
+import Validator from "./";
 
 describe("Test", () => {
   test("does something", () => {
-    const rules = [
+    const inputs = [
       {
         data: { value: "atul.12788@gmail" },
         check: "email",
@@ -10,8 +10,10 @@ describe("Test", () => {
       }
     ];
 
+    const v = new Validator();
+
     function checkValidation() {
-      validate(rules);
+      v.validate(inputs);
     }
 
     expect(checkValidation).toThrowError("Please enter valid email.");
