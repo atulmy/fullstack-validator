@@ -8,7 +8,7 @@ describe("validate", () => {
   test("correct email", () => {
     const inputs = [
       {
-        data: { value: "atul.12788@gmail.com" },
+        data: { value: "user@example.com" },
         check: "email",
         message: "Please enter valid email."
       }
@@ -26,7 +26,7 @@ describe("validate", () => {
   test("incorrect email", () => {
     const inputs = [
       {
-        data: { value: "atul.12788@gmail" },
+        data: { value: "user!example.com" },
         check: "email",
         message: "Please enter valid email."
       }
