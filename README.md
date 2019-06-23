@@ -1,12 +1,13 @@
 # Full-Stack Validator
 
-A simple validation library you can use in your JavaScript based frontend and backend projects.
+A simple validation library for server and client side JavaScript applications.
 
 ### Features
 
 - Light weight
-- Extensible (add your own rules)
-- Universal (can be used in frontend and backend)
+- Universal (can be used in server and client side)
+- Out of the box basic validation rules
+- Extensible (add your own rules, example: [Lodash](https://github.com/lodash/lodash)'s `isEmpty`)
 
 ### Installation
 
@@ -45,19 +46,17 @@ async function userCreate({ email, password }) {
 
   // Create user
   try {
-    const user = await User.findOne({ email, password });
+    const user = await User.create({ email, password: hash(password) });
 
     if (user) {
       return {
         data: user,
-        message: "Logged in successfully."
+        message: "User created successfully."
       };
     }
   } catch (error) {
     throw new Error(`An error occurred. ${error.message}`);
   }
-
-  throw new Error("Wrong username or password.");
 }
 ```
 
