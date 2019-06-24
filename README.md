@@ -12,7 +12,7 @@ A simple validation library for server and client side JavaScript applications.
 ### Installation
 
 ```bash
-npm install --save node-input-validator
+npm install --save fullstack-validator
 ```
 
 ### Usage
