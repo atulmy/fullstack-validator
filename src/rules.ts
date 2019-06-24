@@ -46,7 +46,7 @@ export function isLength({ value, length }: Input): boolean {
  * @param {*} inputs
  * @returns {boolean}
  */
-export function isLengthMin({ value, length }: Input): boolean {
+export function isLengthMinimum({ value, length }: Input): boolean {
   return value.length >= length;
 }
 
@@ -55,12 +55,16 @@ export function isLengthMin({ value, length }: Input): boolean {
  * @param {*} inputs
  * @returns {boolean}
  */
-export function isLengthMax({ value, length }: Input): boolean {
+export function isLengthMaximum({ value, length }: Input): boolean {
   return value.length <= length;
 }
 
-// Email
-export function isEmail({ value }: Input): boolean {
+/**
+ * Check given string for valid email
+ * @param {*} inputs
+ * @returns {boolean}
+ */
+export function isValidEmail({ value }: Input): boolean {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(value).toLowerCase());
 }

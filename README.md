@@ -4,7 +4,7 @@ A simple validation library for server and client side JavaScript applications.
 
 ### Features
 
-- Light weight
+- Tiny footprint
 - Universal (can be used in server and client side)
 - Out of the box basic validation rules
 - Extensible (add your own rules, example: [Lodash](https://github.com/lodash/lodash)'s `isEmpty`)

@@ -1,13 +1,5 @@
 // Imports
-import {
-  isEmail,
-  isEmpty,
-  isEqual,
-  isLength,
-  isLengthMax,
-  isLengthMin,
-  isNotEmpty
-} from "./rules";
+import * as rules from "./rules";
 
 interface Inputs {
   [key: string]: any;
@@ -16,19 +8,6 @@ interface Inputs {
 interface Rules {
   [key: string]: any;
 }
-
-/**
- * Default rules
- */
-export const rules: Rules = {
-  empty: isEmpty,
-  notEmpty: isNotEmpty,
-  equal: isEqual,
-  length: isLength,
-  lengthMin: isLengthMin,
-  lengthMax: isLengthMax,
-  email: isEmail
-};
 
 /**
  * @class Validator

@@ -9,7 +9,7 @@ describe("validate", () => {
     const inputs = [
       {
         data: { value: "user@example.com" },
-        check: "email",
+        check: "isValidEmail",
         message: "Please enter valid email."
       }
     ];
@@ -27,7 +27,7 @@ describe("validate", () => {
     const inputs = [
       {
         data: { value: "user!example.com" },
-        check: "email",
+        check: "isValidEmail",
         message: "Please enter valid email."
       }
     ];
@@ -45,14 +45,14 @@ describe("validate", () => {
     const inputs = [
       {
         data: { value: 2, computed: 5 },
-        check: "double",
-        message: "Double value is incorrect."
+        check: "sum",
+        message: "Sum value is incorrect."
       }
     ];
 
     const rules = {
-      double: ({ value, computed }: Inputs): boolean => {
-        return value * value === computed;
+      sum: ({ value, computed }: Inputs): boolean => {
+        return value + value === computed;
       }
     };
 
@@ -62,6 +62,6 @@ describe("validate", () => {
       v.validate(inputs);
     }
 
-    expect(checkValidation).toThrowError("Double value is incorrect.");
+    expect(checkValidation).toThrowError("Sum value is incorrect.");
   });
 });
