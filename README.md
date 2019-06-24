@@ -1,6 +1,6 @@
 # Full-Stack Validator
 
-A simple validation library for server and client side JavaScript applications.
+A simple validation library for server and client side applications.
 
 ### Features
 
