@@ -7,7 +7,7 @@ A simple validation library for server and client side applications.
 - Tiny footprint
 - Universal (can be used in server and client side)
 - Out of the box basic validation rules
-- Extensible (add your own rules, example: [Lodash](https://github.com/lodash/lodash)'s `isEmpty`)
+- Extensible (add your own rules)
 
 ### Installation
 
@@ -33,7 +33,7 @@ async function userCreate({ email, password }) {
       message: "Please enter valid email."
     },
     {
-      data: { value: password },
+      data: { value: password, length: 6 },
       check: "lengthMin",
       message: "Password needs to be minimum 6 characters long"
     }
@@ -53,6 +53,53 @@ async function userCreate({ email, password }) {
     if (user) {
       return {
         data: user,
+        message: "User created successfully."
+      };
+    }
+  } catch (error) {
+    throw new Error(`An error occurred. ${error.message}`);
+  }
+}
+```
+
+Custom rules
+
+```javascript
+import Validator from "fullstack-validator";
+
+const rules = {
+  isValidCreditCard: ({ value }) => {
+    const regexp = /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/;
+    return regexp.test(value);
+  }
+};
+
+const v = new Validator(rules);
+
+async function paymentCreate({ creditCardNumber }) {
+  // Inputs to validate
+  const inputs = [
+    {
+      data: { value: creditCardNumber },
+      check: "isValidCreditCard",
+      message: "Please enter valid credit card."
+    }
+  ];
+
+  // Validate
+  try {
+    v.validate(inputs);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+
+  // Create payment
+  try {
+    const payment = await Payment.create({ creditCardNumber });
+
+    if (payment) {
+      return {
+        data: payment,
         message: "User created successfully."
       };
     }
