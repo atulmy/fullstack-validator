@@ -20,7 +20,9 @@ npm install --save fullstack-validator
 Simple Example
 
 ```javascript
-import v from "fullstack-validator";
+import Validator from "fullstack-validator";
+
+const v = new Validator(/* pass custom rules here */);
 
 async function userCreate({ email, password }) {
   // Inputs to validate
