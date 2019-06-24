@@ -4,10 +4,10 @@ A simple validation library for server and client side applications.
 
 ### Features
 
-- Tiny footprint
-- Universal (can be used in server and client side)
+- Tiny footprint _(2.27 kB / gzip: 931 B)_
+- Universal _(can be used in server and client side)_
 - Out of the box basic validation rules
-- Extensible (add your own rules)
+- Extensible _(add your own rules)_
 
 ### Installation
 
