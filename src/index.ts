@@ -28,8 +28,6 @@ class Validator {
    * @param {*} inputs
    */
   public validate(inputs: Inputs[] = []) {
-    console.log(inputs);
-
     for (const v of inputs) {
       if (v.not ? this.rules[v.check](v.data) : !this.rules[v.check](v.data)) {
         throw new Error(v.message);
