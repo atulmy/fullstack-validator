@@ -1,4 +1,4 @@
-import Validator from "./";
+import { Validator, rules } from "./";
 
 interface Inputs {
   [key: string]: any;
@@ -9,7 +9,7 @@ describe("validate", () => {
     const inputs = [
       {
         data: { value: "user@example.com" },
-        check: "isValidEmail",
+        check: rules.isValidEmail,
         message: "Please enter valid email."
       }
     ];
@@ -27,7 +27,7 @@ describe("validate", () => {
     const inputs = [
       {
         data: { value: "user!example.com" },
-        check: "isValidEmail",
+        check: rules.isValidEmail,
         message: "Please enter valid email."
       }
     ];
@@ -42,21 +42,22 @@ describe("validate", () => {
   });
 
   test("custom rule", () => {
-    const inputs = [
-      {
-        data: { value: 2, computed: 5 },
-        check: "sum",
-        message: "Sum value is incorrect."
-      }
-    ];
 
-    const rules = {
+    const customRules = {
       sum: ({ value, computed }: Inputs): boolean => {
         return value + value === computed;
       }
     };
 
-    const v = new Validator(rules);
+    const inputs = [
+      {
+        data: { value: 2, computed: 5 },
+        check: customRules.sum,
+        message: "Sum value is incorrect."
+      }
+    ];
+
+    const v = new Validator(customRules);
 
     function checkValidation() {
       v.validate(inputs);

@@ -12,6 +12,8 @@ interface Rules {
 /**
  * @class Validator
  */
+
+
 class Validator {
   private readonly rules: Rules;
 
@@ -28,12 +30,13 @@ class Validator {
    * @param {*} inputs
    */
   public validate(inputs: Inputs[] = []) {
+    console.log(this.rules)
     for (const v of inputs) {
-      if (v.not ? this.rules[v.check](v.data) : !this.rules[v.check](v.data)) {
+      if (v.not ? v.check(v.data) : !v.check(v.data)) {
         throw new Error(v.message);
       }
     }
   }
 }
 
-export default Validator;
+export { Validator, rules }
